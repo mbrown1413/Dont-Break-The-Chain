@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}Don't Break The Chain Calendar Generator{% endblock %}
+
+{% block content %}
+<form action="/calendar.pdf"> 
+
+    Start Date:<br>
+
+    <label for="start_year">Year:</label>
+    <input type="text" name="start_year" id="start_year" maxlength=4 size=4 value="{{ today.year }}">
+
+    <label for="start_month">Month:</label>
+    <input type="text" name="start_month" id="start_month" maxlength=2 size=2 value="{{ today.month }}">
+
+    <label for="start_day">Day:</label>
+    <input type="text" name="start_day" id="start_day" maxlength=2 size=2 value="{{ today.day }}">
+
+    <br><br>
+    <input type="submit" value="Generate">
+</form>
+{% endblock %}

@@ -3,9 +3,15 @@
 {% block title %}Don't Break The Chain Calendar Generator{% endblock %}
 
 {% block content %}
-<form action="/calendar.pdf"> 
 
-    Start Date:<br>
+Get your calendar, starting: <a href="chain_calendar.pdf?today">Today</a>, or
+<a href="chain_calendar.pdf?tomorrow">Tomorrow</a>
+
+<br><br>
+
+<form action="chain_calendar.pdf">
+
+    Start on:<br>
 
     <label for="start_year">Year:</label>
     <input type="text" name="start_year" id="start_year" maxlength=4 size=4 value="{{ today.year }}">

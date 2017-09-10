@@ -191,8 +191,8 @@ class CalendarDrawing:
         right = copy(self)
 
         weeks = list(self.weeks())
-        last_week_in_left   = weeks[len(weeks)//2]
-        first_week_in_right = weeks[len(weeks)//2 + 1]
+        last_week_in_left   = weeks[len(weeks)//2 - 1]
+        first_week_in_right = weeks[len(weeks)//2]
 
         left.end_date = last_week_in_left[-1]
         right.start_date = first_week_in_right[0]

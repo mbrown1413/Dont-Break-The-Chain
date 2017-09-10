@@ -203,6 +203,7 @@ class CalendarDrawing:
 
 def generate_calendar(outfile, start_date=None):
     c = canvas.Canvas(outfile, pagesize=letter)
+    c.setAuthor("Michael Brown")
     w, h = letter
     center = w / 2
 
@@ -222,13 +223,16 @@ def generate_calendar(outfile, start_date=None):
 
     # Subtitle
     date_format = "%b %d, %Y"
-    subtitle = "{}  -  {}".format(
+    subtitle = "{} - {}".format(
             left_col.start_date.strftime(date_format),
             right_col.end_date.strftime(date_format),
     )
     c.setFont("Helvetica", 12)
     c.setFillColor(COLOR_GRAY)
     c.drawCentredString(w/2, h-130, subtitle)
+
+    # PDF title
+    c.setTitle("Don't Break the Chain {}".format(subtitle))
 
     # Attribution
     #c.setFont("Helvetica", 10)

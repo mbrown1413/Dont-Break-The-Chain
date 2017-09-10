@@ -86,30 +86,17 @@ class CalendarDrawing:
         x += self.col_spacing/2
         y += self.row_spacing/2
 
-        # Force the next row to be labeled
-        # This happens when the first row is labeled, as usual, but also
-        # contains the first day of the next month.
-        force_label_next_row = False
-
+        last_week = None
         for row, week in enumerate(self.weeks()):
-            row_shows_month = False
-            row_shows_year = False
-
-            # Draw row label?
             days_of_month = [d.day for d in week]
-            if 1 in days_of_month or row == 0 or force_label_next_row:
-                force_label_next_row = False
-                if row == 0:
-                    d = week[0]
-                    force_label_next_row = 1 in days_of_month and d.day != 1
-                elif 1 in days_of_month:
-                    d = week[days_of_month.index(1)]
-                else:  # force_label_next_row == true
-                    d = week[0]
-                force_show_year = row == 0 and show_year_on_first_row
-                self.draw_row_label(canvas, x, y, d, row, force_show_year)
 
-            # Draw month divider?
+            # Row label (ex: 2017 Jan)
+            side = 0 if self.label_side == "left" else -1
+            if row == 0 or week[side].month != last_week[side].month:
+                force_show_year = row == 0 and show_year_on_first_row
+                self.draw_row_label(canvas, x, y, week[side], row, force_show_year)
+
+            # Month divider (line between months)
             if 1 in days_of_month:
                 col = week[days_of_month.index(1)].weekday()
                 self.draw_month_divider(canvas, x, y, row, col)
@@ -122,6 +109,8 @@ class CalendarDrawing:
                     y - self.row_spacing*row,
                     str(d.day)
                 )
+
+            last_week = week
 
     def draw_row_label(self, canvas, x, y, d, row, force_show_year=False):
         """

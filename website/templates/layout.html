@@ -1,5 +1,11 @@
 <!doctype html>
 <title>{% block title %}{% endblock %}</title>
 {% block head %}{% endblock %}
+<style type="text/css">
+    #content {
+        width: 40%;
+        padding-left: 3em;
+    }
+</style>
 
 <div id="content">{% block content %}{% endblock %}</div>

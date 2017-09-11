@@ -1,17 +1,35 @@
 {% extends "layout.html" %}
 
-{% block title %}Don't Break The Chain Calendar Generator{% endblock %}
+{% block title %}Don't Break The Chain{% endblock %}
 
 {% block content %}
 
-Get your calendar, starting: <a href="chain_calendar.pdf?today">Today</a>, or
-<a href="chain_calendar.pdf?tomorrow">Tomorrow</a>
+<h1>Don't Break The Chain:<br>Calendar Generator</h1>
 
-<br><br>
+Don't wait until January 1st to start a habit! This generator will start your
+calendar on any day of the year, of any year.
 
+<div style="font-size: 2em;">
+    Starting: <a href="chain_calendar.pdf?today">Today</a>, or
+    <a href="chain_calendar.pdf?tomorrow">Tomorrow</a>
+</div>
+
+<p>
+If you're not familiar with the Don't-Break-the-Chain, it's a technique for
+forming daily habits. Print out a calendar and write at the top the activity
+you want to do every day. Every day you do the activity, cross the date off.
+See how long you can go without missing a day!
+</p><p>
+The great thing about committing to a daily habit, is that you don't have to
+decide if you feel like doing it or not every day. If you're tired, or
+unmotivated for a day, you don't have to wonder if you should or not, the
+answer is yes, you should.
+</p>
+
+<br><br><br>
+
+If you really don't want to start your habit until later, enter your start date here:
 <form action="chain_calendar.pdf">
-
-    Start on:<br>
 
     <label for="start_year">Year:</label>
     <input type="text" name="start_year" id="start_year" maxlength=4 size=4 value="{{ today.year }}">
@@ -25,4 +43,5 @@ Get your calendar, starting: <a href="chain_calendar.pdf?today">Today</a>, or
     <br><br>
     <input type="submit" value="Generate">
 </form>
+
 {% endblock %}

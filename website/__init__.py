@@ -20,11 +20,14 @@ def get_pdf():
     elif 'tomorrow' in request.args:
         start_date = date.today() + timedelta(days=1)
     else:
-        start_date = date(
-            year=int(request.args.get('start_year')),
-            month=int(request.args.get('start_month')),
-            day=int(request.args.get('start_day')),
-        )
+        try:
+            start_date = date(
+                year=int(request.args.get('start_year')),
+                month=int(request.args.get('start_month')),
+                day=int(request.args.get('start_day')),
+            )
+        except ValueError as e:
+            return '<span style="font-size: 2em; color: red;">Invalid Date</span>'
 
     buf = BytesIO()
     calgen.generate_calendar(buf, start_date)

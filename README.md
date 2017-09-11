@@ -2,6 +2,8 @@
 Don't Break the Chain Generator
 ===============================
 
+Live site: [msbrown.net/chain](msbrown.net/chain)
+
 Don't wait until January 1st to start a habit! This generator will start your
 calendar on any day of the year, of any year.
 

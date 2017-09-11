@@ -224,9 +224,9 @@ def generate_calendar(outfile, start_date=None):
     c.setTitle("Don't Break the Chain {}".format(subtitle))
 
     # Attribution
-    #c.setFont("Helvetica", 10)
-    #c.setFillColor(COLOR_GRAY)
-    #c.drawCentredString(w/2 + 200, 42, "Michael Brown")
+    c.setFont("Helvetica", 10)
+    c.setFillColor(COLOR_GRAY)
+    c.drawCentredString(w/2 + 200, 42, "msbrown.net/chain")
 
     # Lines for debugging alignment
     """

@@ -4,44 +4,55 @@
 
 {% block content %}
 
-<h1>Don't Break The Chain:<br>Calendar Generator</h1>
+<div style="float: left; width: 40%;">
 
-Don't wait until January 1st to start a habit! This generator will start your
-calendar on any day of the year, of any year.
+    <h1>Don't Break The Chain:<br>Calendar Generator</h1>
 
-<div style="font-size: 2em;">
-    Starting: <a href="chain_calendar.pdf?today">Today</a>, or
-    <a href="chain_calendar.pdf?tomorrow">Tomorrow</a>
+    Don't wait until January 1st to start a habit! This generator will start
+    your calendar on any day of the year, of any year.
+
+    <div style="font-size: 2em;">
+        Starting: <a href="chain_calendar.pdf?today">Today</a>, or
+        <a href="chain_calendar.pdf?tomorrow">Tomorrow</a>
+    </div>
+
+    <p>
+    If you're not familiar with the Don't-Break-the-Chain, it's a technique for
+    forming daily habits. Print out a calendar and write at the top the
+    activity you want to do every day. Every day you do the activity, cross the
+    date off.  See how long you can go without missing a day!
+    </p><p>
+    The great thing about committing to a daily habit, is that you don't have
+    to decide if you feel like doing it or not every day. If you're tired, or
+    unmotivated for a day, you don't have to wonder if you should or not, the
+    answer is yes, you should.
+    </p>
+
+    <br><br><br>
+
+    If you really don't want to start your habit until later, enter your start
+    date here:
+    <form action="chain_calendar.pdf">
+
+        <label for="start_year">Year:</label>
+        <input type="text" name="start_year" id="start_year" maxlength=4 size=4 value="{{ today.year }}">
+
+        <label for="start_month">Month:</label>
+        <input type="text" name="start_month" id="start_month" maxlength=2 size=2 value="{{ today.month }}">
+
+        <label for="start_day">Day:</label>
+        <input type="text" name="start_day" id="start_day" maxlength=2 size=2 value="{{ today.day }}">
+
+        <br><br>
+        <input type="submit" value="Generate">
+    </form>
+
 </div>
 
-<p>
-If you're not familiar with the Don't-Break-the-Chain, it's a technique for
-forming daily habits. Print out a calendar and write at the top the activity
-you want to do every day. Every day you do the activity, cross the date off.
-See how long you can go without missing a day!
-</p><p>
-The great thing about committing to a daily habit, is that you don't have to
-decide if you feel like doing it or not every day. If you're tired, or
-unmotivated for a day, you don't have to wonder if you should or not, the
-answer is yes, you should.
-</p>
-
-<br><br><br>
-
-If you really don't want to start your habit until later, enter your start date here:
-<form action="chain_calendar.pdf">
-
-    <label for="start_year">Year:</label>
-    <input type="text" name="start_year" id="start_year" maxlength=4 size=4 value="{{ today.year }}">
-
-    <label for="start_month">Month:</label>
-    <input type="text" name="start_month" id="start_month" maxlength=2 size=2 value="{{ today.month }}">
-
-    <label for="start_day">Day:</label>
-    <input type="text" name="start_day" id="start_day" maxlength=2 size=2 value="{{ today.day }}">
-
-    <br><br>
-    <input type="submit" value="Generate">
-</form>
+<div style="float: right; width: 50%;">
+    <a href="chain_calendar.pdf?today">
+        <img src="chain_calendar.png?today" alt="Today's Calendar" title="Today's Calendar" style="width: 90%; max-width: 506px; height: auto;">
+    </a>
+</div>
 
 {% endblock %}

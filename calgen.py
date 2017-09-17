@@ -208,6 +208,7 @@ def generate_calendar(outfile, start_date=None):
     # Title
     c.setFont("Helvetica", 30)
     c.setFillColor("black")
+    c.drawCentredString(w/2, h-50, "Don't Break The Chain")
     c.drawCentredString(w/2, h-100, "_______________")
 
     # Subtitle

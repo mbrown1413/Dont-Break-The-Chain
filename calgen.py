@@ -27,6 +27,9 @@ def add_one_year(d):
 
     return same_day_next_year
 
+def get_day_pos(d):
+    # Rotates the days by 1 so Sunday is the beginning of the week
+    return (d.weekday() + 1) % 7
 
 class CalendarDrawing:
 
@@ -74,7 +77,7 @@ class CalendarDrawing:
             week.append(d)
 
             d += timedelta(days=1)
-            if d.weekday() == 0:
+            if get_day_pos(d) == 0:
                 yield week
                 week = []
                 row += 1
@@ -98,14 +101,14 @@ class CalendarDrawing:
 
             # Month divider (line between months)
             if 1 in days_of_month:
-                col = week[days_of_month.index(1)].weekday()
+                col = get_day_pos(week[days_of_month.index(1)])
                 self.draw_month_divider(canvas, x, y, row, col)
 
             # Days of Month
             for d in week:
                 self.set_font_style(canvas, "day", d)
                 canvas.drawCentredString(
-                    x + self.col_spacing*d.weekday(),
+                    x + self.col_spacing*get_day_pos(d),
                     y - self.row_spacing*row,
                     str(d.day)
                 )

@@ -37,7 +37,7 @@ class CalendarDrawing:
         self.start_date = date.today() if start_date is None else start_date
         if end_date is None:
             # Default to one year, correcting for leap year.
-            self.end_date = add_one_year(self.start_date)
+            self.end_date = add_one_year(self.start_date) - timedelta(days=1)
         else:
             self.end_date = end_date
         self.label_side = label_side

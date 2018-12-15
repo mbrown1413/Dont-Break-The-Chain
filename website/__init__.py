@@ -42,7 +42,7 @@ def get_pdf(extension="pdf"):
 
     elif extension == "png":
         proc = subprocess.Popen(
-            ["convert", "-", "-format", "png", "-trim", "-"],
+            ["convert", "PDF:-", "-trim", "PNG:-"],
             stdin=subprocess.PIPE, stdout=subprocess.PIPE
         )
         try:

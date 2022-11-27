@@ -157,6 +157,19 @@
         <label for="start_day">Day:</label>
         <input type="text" name="start_day" id="start_day" maxlength=2 size=2 value="{{ today.day }}">
 
+        <br>
+        <br>
+        <label for="week_start">First Day of the Week:</label>
+        <select name="week_start" id="week_start">
+            <option value="0">Monday</option>
+            <option value="1">Tuesday</option>
+            <option value="2">Wednesday</option>
+            <option value="3">Thursday</option>
+            <option value="4">Friday</option>
+            <option value="5">Saturday</option>
+            <option value="6">Sunday</option>
+        </select>
+
         <br><br>
         <input type="submit" value="Generate">
     </form>

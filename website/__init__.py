@@ -27,11 +27,17 @@ def get_pdf(extension="pdf"):
                 month=int(request.args.get('start_month')),
                 day=int(request.args.get('start_day')),
             )
-        except ValueError as e:
+        except ValueError:
             return '<span style="font-size: 2em; color: red;">Invalid Date</span>'
 
+    try:
+        week_start = int(request.args.get('week_start', "0"))
+    except ValueError:
+        return '<span style="font-size: 2em; color: red;">Invalid week start</span>'
+    week_start = min(6, max(0, week_start))
+
     pdf_buf = BytesIO()
-    calgen.generate_calendar(pdf_buf, start_date)
+    calgen.generate_calendar(pdf_buf, start_date, week_start=week_start)
 
     if extension == "pdf":
         response = make_response(pdf_buf.getvalue())

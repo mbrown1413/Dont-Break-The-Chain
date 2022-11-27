@@ -27,13 +27,16 @@ def add_one_year(d):
 
     return same_day_next_year
 
-def get_day_pos(d):
-    # Rotates the days by 1 so Sunday is the beginning of the week
-    return (d.weekday() + 1) % 7
-
 class CalendarDrawing:
 
-    def __init__(self, start_date=None, end_date=None, label_side="left"):
+    def __init__(self, start_date=None, end_date=None, label_side="left", week_start=0):
+        """
+        :param start_date: Date the calendar starts on
+        :param end_date: Date the calendar ends on
+        :param label_side: ???
+        :param week_start: The day of the week, 0-6 being Monday-Sunday, which
+            weeks start.
+        """
         self.start_date = date.today() if start_date is None else start_date
         if end_date is None:
             # Default to one year, correcting for leap year.
@@ -41,10 +44,18 @@ class CalendarDrawing:
         else:
             self.end_date = end_date
         self.label_side = label_side
+        self.week_start = week_start
         self.font_size = 12
 
         self.col_spacing = self.font_size * 2.0
         self.row_spacing = self.font_size * 1.7
+
+    def get_day_pos(self, d):
+        """Return the column this day should be placed in.
+
+        :returns: 0-6, with 0 being the first day of the week according to `self.week_start`.
+        """
+        return (d.weekday() - self.week_start) % 7
 
     def get_width(self):
         """Does not include side labels."""
@@ -77,7 +88,7 @@ class CalendarDrawing:
             week.append(d)
 
             d += timedelta(days=1)
-            if get_day_pos(d) == 0:
+            if self.get_day_pos(d) == 0:
                 yield week
                 week = []
                 row += 1
@@ -101,14 +112,14 @@ class CalendarDrawing:
 
             # Month divider (line between months)
             if 1 in days_of_month:
-                col = get_day_pos(week[days_of_month.index(1)])
+                col = self.get_day_pos(week[days_of_month.index(1)])
                 self.draw_month_divider(canvas, x, y, row, col)
 
             # Days of Month
             for d in week:
                 self.set_font_style(canvas, "day", d)
                 canvas.drawCentredString(
-                    x + self.col_spacing*get_day_pos(d),
+                    x + self.col_spacing*self.get_day_pos(d),
                     y - self.row_spacing*row,
                     str(d.day)
                 )
@@ -193,7 +204,7 @@ class CalendarDrawing:
 
         return left, right
 
-def generate_calendar(outfile, start_date=None):
+def generate_calendar(outfile, start_date=None, week_start=0):
     c = canvas.Canvas(outfile, pagesize=letter)
     c.setAuthor("Michael Brown")
     w, h = letter
@@ -202,7 +213,7 @@ def generate_calendar(outfile, start_date=None):
     if start_date is None:
         start_date = date.today()
 
-    cal = CalendarDrawing(start_date)
+    cal = CalendarDrawing(start_date, week_start=week_start)
     left_col, right_col = cal.split()
     middle_padding = 50
     left_col.draw(c, center - middle_padding/2 - left_col.get_width(), h-195, show_year_on_first_row=True)
